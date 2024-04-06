@@ -4,6 +4,7 @@ import AppLayout from "./layout/AppLayout";
 import Hompage from "./pages/Homepage/Hompage";
 import MoviePage from "./pages/Movies/MoviePage";
 import MovieDetailPage from "./pages/MovieDetail/MovieDetailPage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 //메인페이지  /
 //영화 전체 보여주는 페이지(서치)  /movies?q=
