@@ -4,6 +4,7 @@
   background-size: cover;
   cursor: pointer;
   transition: all 0.5s;
+  border-radius: 10px;
 }
 
 .overlay {
@@ -14,6 +15,8 @@
   transition: all 1s;
   color: #ffffff;
   overflow-wrap: break-word;
+  border-radius: 10px;
+  padding: 2em 1em;
 }
 
 .overlay:hover {
@@ -23,4 +26,56 @@
 .movie-card:hover {
   transform: scale(1.2) translateZ(20px);
   z-index: 2;
+  border: 2px solid #ffffff;
+}
+
+.age {
+  background-color: #f27127;
+  color: #ffffff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 0.8em;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5em;
+}
+
+.movie-title {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 1.6em;
+}
+
+.genre {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.genre .badge {
+  margin: 0.6em 0.4em 1em 0;
+  opacity: 0.7;
+}
+
+.movie-info {
+  display: flex;
+  align-items: center;
+}
+
+.movie-star {
+  display: flex;
+  align-items: center;
+  font-size: 0.8em;
+  margin-right: 0.4em;
+}
+
+.favorite {
+  display: flex;
+  align-items: center;
+  font-size: 0.8em;
+  margin-right: 0.4em;
 }

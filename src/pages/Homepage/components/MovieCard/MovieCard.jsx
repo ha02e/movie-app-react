@@ -14,18 +14,26 @@ const MovieCard = ({ movie }) => {
       className="movie-card"
     >
       <div className="overlay">
-        <h2>{movie.title}</h2>
-        <div>
+        <div className="age">
+          <span>{movie.adult ? "18" : "ALL"}</span>
+        </div>
+        <h2 className="movie-title">{movie.title}</h2>
+        <div className="genre">
           {movie.genre_ids.map((id) => (
             <Badge bg="light" text="dark">
               {id}
             </Badge>
           ))}
         </div>
-        <div>
-          <div>{movie.vote_average}</div>
-          <div>{movie.popularity}</div>
-          <div>{movie.adult ? "over 18" : "under 18"}</div>
+        <div className="movie-info">
+          <div className="movie-star">
+            <span className="material-symbols-rounded">stars</span>
+            {movie.vote_average}
+          </div>
+          <div className="favorite">
+            <span className="material-symbols-rounded">favorite</span>
+            {movie.popularity}
+          </div>
         </div>
       </div>
     </div>

@@ -1,11 +1,12 @@
 .popular-movie-section {
-  height: 400px;
+  height: 440px;
 }
 
 .title {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-wrap: break-word;
 }
 
 .title h3 {
@@ -18,7 +19,7 @@
 
 .carousel-container {
   overflow: hidden;
-  height: 400px;
+  height: 440px;
 }
 
 @media screen and (max-width: 753px) {
