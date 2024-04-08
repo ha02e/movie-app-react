@@ -9,10 +9,11 @@ body {
   background-color: #111111;
   font-family: "Noto Sans", sans-serif;
   font-optical-sizing: auto;
+  color: #ffffff !important;
 }
 
 .logo-img {
-  width: 120px;
+  width: 140px;
   margin-right: 2em;
 }
 

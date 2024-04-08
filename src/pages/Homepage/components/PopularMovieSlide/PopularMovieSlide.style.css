@@ -1,0 +1,28 @@
+.popular-movie-section {
+  height: 400px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 2em;
+  text-align: center;
+}
+
+.carousel-container {
+  overflow: hidden;
+  height: 400px;
+}
+
+@media screen and (max-width: 753px) {
+  .title {
+    margin-top: 2em;
+  }
+}
