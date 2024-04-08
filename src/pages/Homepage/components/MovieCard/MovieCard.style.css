@@ -51,13 +51,11 @@
 }
 
 .genre {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  margin: 0.6em 0.4em 1em 0;
 }
 
 .genre .badge {
-  margin: 0.6em 0.4em 1em 0;
+  margin: 0 0.4em 0.2em 0;
   opacity: 0.7;
 }
 
