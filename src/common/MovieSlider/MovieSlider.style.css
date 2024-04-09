@@ -3,9 +3,15 @@
   height: 440px;
 }
 
+.carousel-container .react-multi-carousel-track {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* 원하는 간격으로 설정하세요 */
+}
+
 @media (max-width: 753px) {
   .carousel-container {
-    height: 400px;
+    height: 440px;
     display: flex;
     justify-content: space-between;
   }

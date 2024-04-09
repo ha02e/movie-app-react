@@ -25,7 +25,7 @@ const UpcomingMovieSlide = () => {
   }
 
   return (
-    <div className="top-movie-section">
+    <div className="upcoming-movie-section">
       <Container fluid>
         <Row>
           <Col md={2} className="title">
