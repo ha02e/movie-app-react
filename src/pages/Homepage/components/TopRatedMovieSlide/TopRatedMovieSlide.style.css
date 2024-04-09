@@ -1,6 +1,5 @@
-.popular-movie-section {
+.top-movie-section {
   height: 440px;
-  background-color: #222222;
 }
 
 .text-point {
@@ -9,6 +8,7 @@
 
 .title {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow-wrap: break-word;

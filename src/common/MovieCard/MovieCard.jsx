@@ -1,7 +1,7 @@
 import React from "react";
 import "./MovieCard.style.css";
 import Badge from "react-bootstrap/Badge";
-import { useMovieGenreQuery } from "../../../../hooks/useMovieGenre";
+import { useMovieGenreQuery } from "../../hooks/useMovieGenre";
 
 const MovieCard = ({ movie }) => {
   const { data: genreData } = useMovieGenreQuery();

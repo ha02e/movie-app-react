@@ -1,0 +1,12 @@
+.carousel-container {
+  overflow: hidden;
+  height: 440px;
+}
+
+@media (max-width: 753px) {
+  .carousel-container {
+    height: 400px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
