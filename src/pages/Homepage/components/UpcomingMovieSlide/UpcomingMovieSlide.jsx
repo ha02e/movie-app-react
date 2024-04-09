@@ -1,17 +1,17 @@
 import React from "react";
-import { usePopularMoviesQuery } from "../../../../hooks/usePopularMovies";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "react-multi-carousel/lib/styles.css";
-import "./PopularMovieSlide.style.css";
+import "./UpcomingMovieSlide.style.css";
+import { useUpcomingMoviesQuery } from "../../../../hooks/useUpcomingMovies";
 import MovieSlider from "../../../../common/MovieSlider/MovieSlider";
 import { responsive } from "../../../../constants/responsive";
 
-const PopularMovieSlide = () => {
-  const { data, isLoading, isError, error } = usePopularMoviesQuery();
+const UpcomingMovieSlide = () => {
+  const { data, isLoading, isError, error } = useUpcomingMoviesQuery();
 
   if (isLoading) {
     return (
@@ -25,13 +25,13 @@ const PopularMovieSlide = () => {
   }
 
   return (
-    <div className="popular-movie-section">
+    <div className="top-movie-section">
       <Container fluid>
         <Row>
           <Col md={2} className="title">
-            <span class="material-symbols-rounded">family_star</span>
+            <span class="material-symbols-rounded">new_releases</span>
             <h3>
-              <span className="text-point">Popular</span> Movies
+              <span className="text-point">Upcoming</span> Movies
             </h3>
           </Col>
           <Col md={10}>
@@ -43,4 +43,4 @@ const PopularMovieSlide = () => {
   );
 };
 
-export default PopularMovieSlide;
+export default UpcomingMovieSlide;
