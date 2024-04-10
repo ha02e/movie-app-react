@@ -3,7 +3,7 @@ import { useSearchMovieQuery } from "../../hooks/useSearchMovie";
 import { useSearchParams } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, ButtonGroup, Button } from "react-bootstrap";
 import MovieCard from "../../common/MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
 import "./MoviePage.style.css";
@@ -20,6 +20,8 @@ import "./MoviePage.style.css";
 const MoviePage = () => {
   const [query, setQuery] = useSearchParams();
   const [page, setPage] = useState(1);
+  const [isToggled, setIsToggled] = useState(false);
+
   const keyword = query.get("q");
 
   const { data, isLoading, isError, error } = useSearchMovieQuery({
@@ -30,6 +32,10 @@ const MoviePage = () => {
 
   const handlePageClick = ({ selected }) => {
     setPage(selected + 1);
+  };
+
+  const toggleButton = () => {
+    setIsToggled(!isToggled);
   };
 
   if (isLoading) {
@@ -48,7 +54,36 @@ const MoviePage = () => {
       <Container>
         <Row>
           <Col lg={4} xs={12}>
-            filter
+            <Col className="sort-section">
+              <h4>Sort By</h4>
+              <select class="form-select" aria-label="Default select example">
+                <option selected value="1">
+                  Popularity
+                </option>
+                <option value="2">The Latest</option>
+              </select>
+            </Col>
+            <Col>
+              <h4>Genre</h4>
+              <div class="genre-button">
+                <Button
+                  toggle
+                  variant="primary"
+                  onClick={toggleButton}
+                  active={isToggled}
+                >
+                  Action
+                </Button>
+                <Button
+                  toggle
+                  variant="primary"
+                  onClick={toggleButton}
+                  active={isToggled}
+                >
+                  Fantasy
+                </Button>
+              </div>
+            </Col>
           </Col>
           <Col lg={8} xs={12}>
             <Row>
