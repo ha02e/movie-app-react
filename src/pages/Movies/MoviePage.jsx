@@ -6,6 +6,7 @@ import Spinner from "react-bootstrap/Spinner";
 import { Container, Row, Col } from "react-bootstrap";
 import MovieCard from "../../common/MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
+import "./MoviePage.style.css";
 
 //경로
 //1. nav바에서 클릭해서 온 경우 -> keyword 없음 / popularMovie 보여주기
@@ -58,13 +59,13 @@ const MoviePage = () => {
               ))}
             </Row>
             <ReactPaginate
-              nextLabel="next >"
               onPageChange={handlePageClick}
               pageRangeDisplayed={3}
               marginPagesDisplayed={2}
               pageCount={data?.total_pages} //전체페이지
               forcePage={page - 1}
-              previousLabel="< previous"
+              previousLabel="<"
+              nextLabel=">"
               pageClassName="page-item"
               pageLinkClassName="page-link"
               previousClassName="page-item"
