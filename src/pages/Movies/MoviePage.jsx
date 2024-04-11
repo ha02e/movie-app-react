@@ -21,8 +21,11 @@ import "./MoviePage.style.css";
 const MoviePage = () => {
   const [query, setQuery] = useSearchParams();
   const [page, setPage] = useState(1);
+  const [selectedGenre, setSelectedGenre] = useState(null);
 
   const keyword = query.get("q");
+
+  const { data: genreData } = useMovieGenreQuery();
 
   const { data, isLoading, isError, error } = useSearchMovieQuery({
     keyword,
@@ -34,7 +37,9 @@ const MoviePage = () => {
     setPage(selected + 1);
   };
 
-  const { data: genreData } = useMovieGenreQuery();
+  const handleGenreClick = (genreId) => {
+    setSelectedGenre(genreId);
+  };
 
   if (isLoading) {
     return (
@@ -65,7 +70,13 @@ const MoviePage = () => {
               <h4>Genre</h4>
               <div class="genre-button-section">
                 {genreData?.map((item) => (
-                  <button className="genre-button" key={item.id}>
+                  <button
+                    className={`genre-button ${
+                      selectedGenre === item.id ? "selected" : ""
+                    }`}
+                    key={item.id}
+                    onClick={() => handleGenreClick(item.id)}
+                  >
                     {item.name}
                   </button>
                 ))}

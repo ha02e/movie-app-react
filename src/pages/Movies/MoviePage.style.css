@@ -22,10 +22,19 @@ h4 {
   background-color: #ffffff;
 }
 
+.genre-button.selected {
+  background-color: #f27127;
+  color: #fff;
+}
+
+.movie-card {
+  margin-bottom: 2em;
+}
+
 .pagination {
   display: flex;
   justify-content: center;
-  margin: 2.8em 0;
+  margin: 1.8em 0 3em 0;
 }
 
 .page-item .page-link {
