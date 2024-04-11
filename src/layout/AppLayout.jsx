@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 
 const AppLayout = () => {
