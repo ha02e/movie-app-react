@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useSearchMovieQuery } from "../../hooks/useSearchMovie";
+import { useMovieGenreQuery } from "../../hooks/useMovieGenre";
 import { useSearchParams } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
-import { Container, Row, Col, ButtonGroup, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import MovieCard from "../../common/MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
 import "./MoviePage.style.css";
@@ -20,7 +21,6 @@ import "./MoviePage.style.css";
 const MoviePage = () => {
   const [query, setQuery] = useSearchParams();
   const [page, setPage] = useState(1);
-  const [isToggled, setIsToggled] = useState(false);
 
   const keyword = query.get("q");
 
@@ -34,9 +34,7 @@ const MoviePage = () => {
     setPage(selected + 1);
   };
 
-  const toggleButton = () => {
-    setIsToggled(!isToggled);
-  };
+  const { data: genreData } = useMovieGenreQuery();
 
   if (isLoading) {
     return (
@@ -54,7 +52,7 @@ const MoviePage = () => {
       <Container>
         <Row>
           <Col lg={4} xs={12}>
-            <Col className="sort-section">
+            <Col className="sort-section" lg={12} xs={12}>
               <h4>Sort By</h4>
               <select class="form-select" aria-label="Default select example">
                 <option selected value="1">
@@ -63,25 +61,14 @@ const MoviePage = () => {
                 <option value="2">The Latest</option>
               </select>
             </Col>
-            <Col>
+            <Col lg={12} xs={12}>
               <h4>Genre</h4>
-              <div class="genre-button">
-                <Button
-                  toggle
-                  variant="primary"
-                  onClick={toggleButton}
-                  active={isToggled}
-                >
-                  Action
-                </Button>
-                <Button
-                  toggle
-                  variant="primary"
-                  onClick={toggleButton}
-                  active={isToggled}
-                >
-                  Fantasy
-                </Button>
+              <div class="genre-button-section">
+                {genreData?.map((item) => (
+                  <button className="genre-button" key={item.id}>
+                    {item.name}
+                  </button>
+                ))}
               </div>
             </Col>
           </Col>
