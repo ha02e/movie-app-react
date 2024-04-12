@@ -11,39 +11,3 @@ body {
   font-optical-sizing: auto;
   color: #ffffff !important;
 }
-
-.logo-img {
-  width: 140px;
-  margin-right: 2em;
-}
-
-.logo-img img {
-  width: 100%;
-}
-
-.navbar {
-  background-color: #111111 !important;
-  padding: 1em 1.4em;
-  color: #ffffff;
-}
-
-.nav-link {
-  color: #ffffff;
-  margin-right: 1em;
-  font-size: 1.1em;
-}
-
-.nav-link:hover {
-  color: #f27127;
-}
-
-.search-btn {
-  background-color: #111111 !important;
-  border-color: #f27127 !important;
-  color: #f27127 !important;
-}
-
-.search-btn:hover {
-  background-color: #f27127 !important;
-  color: #ffffff !important;
-}

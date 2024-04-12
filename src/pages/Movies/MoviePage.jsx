@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSearchMovieQuery } from "../../hooks/useSearchMovie";
 import { useMovieGenreQuery } from "../../hooks/useMovieGenre";
 import { useSearchParams } from "react-router-dom";
@@ -23,7 +23,8 @@ const MoviePage = () => {
   const [page, setPage] = useState(1);
   const [selectedItem, setSelectedItem] = useState("Popularity");
   const [sortBy, setSortBy] = useState("");
-  const [selectedGenre, setSelectedGenre] = useState(null);
+  const [selectedGenre, setSelectedGenre] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
 
   const keyword = query.get("q");
 
@@ -40,26 +41,56 @@ const MoviePage = () => {
     setSortBy(selectedValue);
   };
 
-  const sortedMovies = data?.results.sort((a, b) => {
-    // "popularity.desc"를 기준으로 내림차순 정렬
-    if (sortBy === "Popularity") {
+  const sortedMovies =
+    data?.results.sort((a, b) => {
+      // "popularity.desc"를 기준으로 내림차순 정렬
+      if (sortBy === "Popularity") {
+        return b.popularity - a.popularity;
+      }
+      // "release_date.desc"를 기준으로 내림차순 정렬
+      if (sortBy === "The Latest") {
+        return new Date(b.release_date) - new Date(a.release_date);
+      }
+      // 기본적으로는 인기순으로 정렬
       return b.popularity - a.popularity;
+    }) || [];
+
+  const filteredMovies = sortedMovies.filter((movie) => {
+    if (selectedGenre.length === 0) {
+      // 선택된 장르가 없으면 모든 영화를 보여줍니다.
+      return true;
+    } else {
+      // 선택된 장르에 속하는 영화만 필터링합니다.
+      return selectedGenre.every((genreId) =>
+        movie.genre_ids.includes(genreId)
+      );
     }
-    // "release_date.desc"를 기준으로 내림차순 정렬
-    if (sortBy === "The Latest") {
-      return new Date(b.release_date) - new Date(a.release_date);
-    }
-    // 기본적으로는 인기순으로 정렬
-    return b.popularity - a.popularity;
   });
 
   const handleGenreClick = (genreId) => {
-    setSelectedGenre(genreId);
+    const index = selectedGenre.indexOf(genreId);
+    if (index === -1) {
+      // 선택되지 않은 장르일 경우 추가
+      setSelectedGenre([...selectedGenre, genreId]);
+    } else {
+      // 선택된 장르일 경우 제거
+      const updatedGenre = [...selectedGenre];
+      updatedGenre.splice(index, 1);
+      setSelectedGenre(updatedGenre);
+    }
   };
+
+  // console.log("selected!!", selectedGenre);
 
   const handlePageClick = ({ selected }) => {
     setPage(selected + 1);
   };
+
+  useEffect(() => {
+    if (data) {
+      setTotalPages(data.total_pages);
+    }
+  }, [data]);
 
   if (isLoading) {
     return (
@@ -94,7 +125,7 @@ const MoviePage = () => {
                 {genreData?.map((item) => (
                   <button
                     className={`genre-button ${
-                      selectedGenre === item.id ? "selected" : ""
+                      selectedGenre.includes(item.id) ? "selected" : ""
                     }`}
                     key={item.id}
                     onClick={() => handleGenreClick(item.id)}
@@ -107,7 +138,7 @@ const MoviePage = () => {
           </Col>
           <Col lg={8} xs={12}>
             <Row>
-              {sortedMovies.map((movie, index) => (
+              {filteredMovies.map((movie, index) => (
                 <Col key={index} lg={4} xs={12}>
                   <MovieCard movie={movie} />
                 </Col>
@@ -117,7 +148,7 @@ const MoviePage = () => {
               onPageChange={handlePageClick}
               pageRangeDisplayed={3}
               marginPagesDisplayed={2}
-              pageCount={data?.total_pages} //전체페이지
+              pageCount={totalPages} //전체페이지
               forcePage={page - 1}
               previousLabel="<"
               nextLabel=">"

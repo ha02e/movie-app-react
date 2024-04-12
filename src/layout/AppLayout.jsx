@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import "./AppLayout.style.css";
 
 const AppLayout = () => {
   const [keyword, setKeyword] = useState("");
