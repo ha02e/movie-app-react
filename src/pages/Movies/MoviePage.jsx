@@ -4,7 +4,7 @@ import { useMovieGenreQuery } from "../../hooks/useMovieGenre";
 import { useSearchParams } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import MovieCard from "../../common/MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
 import "./MoviePage.style.css";
@@ -21,24 +21,44 @@ import "./MoviePage.style.css";
 const MoviePage = () => {
   const [query, setQuery] = useSearchParams();
   const [page, setPage] = useState(1);
+  const [selectedItem, setSelectedItem] = useState("Popularity");
+  const [sortBy, setSortBy] = useState("");
   const [selectedGenre, setSelectedGenre] = useState(null);
 
   const keyword = query.get("q");
-
-  const { data: genreData } = useMovieGenreQuery();
 
   const { data, isLoading, isError, error } = useSearchMovieQuery({
     keyword,
     page,
   });
-  // console.log("dddd", data);
+  console.log("dddd", data);
 
-  const handlePageClick = ({ selected }) => {
-    setPage(selected + 1);
+  const { data: genreData } = useMovieGenreQuery();
+
+  const handleSortByClick = (selectedValue) => {
+    setSelectedItem(selectedValue); // 클릭된 항목의 값을 선택된 값으로 설정
+    setSortBy(selectedValue);
   };
+
+  const sortedMovies = data?.results.sort((a, b) => {
+    // "popularity.desc"를 기준으로 내림차순 정렬
+    if (sortBy === "Popularity") {
+      return b.popularity - a.popularity;
+    }
+    // "release_date.desc"를 기준으로 내림차순 정렬
+    if (sortBy === "The Latest") {
+      return new Date(b.release_date) - new Date(a.release_date);
+    }
+    // 기본적으로는 인기순으로 정렬
+    return b.popularity - a.popularity;
+  });
 
   const handleGenreClick = (genreId) => {
     setSelectedGenre(genreId);
+  };
+
+  const handlePageClick = ({ selected }) => {
+    setPage(selected + 1);
   };
 
   if (isLoading) {
@@ -59,12 +79,14 @@ const MoviePage = () => {
           <Col lg={4} xs={12}>
             <Col className="sort-section" lg={12} xs={12}>
               <h4>Sort By</h4>
-              <select class="form-select" aria-label="Default select example">
-                <option selected value="1">
+              <DropdownButton title={selectedItem}>
+                <Dropdown.Item onClick={() => handleSortByClick("Popularity")}>
                   Popularity
-                </option>
-                <option value="2">The Latest</option>
-              </select>
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => handleSortByClick("The Latest")}>
+                  The Latest
+                </Dropdown.Item>
+              </DropdownButton>
             </Col>
             <Col lg={12} xs={12}>
               <h4>Genre</h4>
@@ -85,7 +107,7 @@ const MoviePage = () => {
           </Col>
           <Col lg={8} xs={12}>
             <Row>
-              {data?.results.map((movie, index) => (
+              {sortedMovies.map((movie, index) => (
                 <Col key={index} lg={4} xs={12}>
                   <MovieCard movie={movie} />
                 </Col>

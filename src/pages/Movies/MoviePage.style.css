@@ -2,6 +2,30 @@ h4 {
   font-family: "Poppins", sans-serif;
 }
 
+.dropdown-toggle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f27127;
+  border: none;
+}
+
+.dropdown-toggle:hover {
+  background-color: #f27127;
+  border: none;
+}
+
+.dropdown-toggle.show {
+  background-color: #f27127;
+  border: none;
+}
+
+.dropdown-menu {
+  width: 100%;
+  --bs-dropdown-link-active-bg: #f27127;
+}
+
 .sort-section {
   margin-bottom: 2em;
 }
@@ -46,7 +70,7 @@ h4 {
 
 .page-item .page-link:hover {
   background-color: #f27127 !important;
-  color: #222222;
+  color: #ffffff;
 }
 
 .disabled .page-link {
@@ -56,5 +80,5 @@ h4 {
 .active .page-link {
   border: 1px solid #d5d5d5;
   background-color: #f27127 !important;
-  color: #222222;
+  color: #ffffff;
 }
