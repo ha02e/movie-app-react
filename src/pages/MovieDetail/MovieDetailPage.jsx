@@ -1,7 +1,17 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Alert, Spinner, Container, Row, Col, Badge } from "react-bootstrap";
+import {
+  Alert,
+  Spinner,
+  Container,
+  Row,
+  Col,
+  Badge,
+  Tabs,
+  Tab,
+} from "react-bootstrap";
 import { useMovieDetailQuery } from "../../hooks/useMovieDetail";
+import { useMovieReviewsQuery } from "../../hooks/useMovieReviews";
 import "./MovieDetailPage.style.css";
 
 const MovieDetailPage = () => {
@@ -9,6 +19,25 @@ const MovieDetailPage = () => {
 
   const { data, isLoading, isError, error } = useMovieDetailQuery({ id });
   console.log("dddd", data);
+
+  const { data: reviewData } = useMovieReviewsQuery({ id });
+  console.log("reviews~~", reviewData);
+  // console.log("reviews ddd~~", reviewData[0].author_details.avatar_path);
+
+  const renderStarRating = (rating) => {
+    const stars = [];
+    const roundedRating = Math.round(rating);
+
+    for (let i = 0; i < 10; i++) {
+      if (i < roundedRating) {
+        stars.push("★");
+      } else {
+        stars.push("☆");
+      }
+    }
+
+    return stars.join("");
+  };
 
   if (isLoading) {
     return (
@@ -74,6 +103,55 @@ const MovieDetailPage = () => {
           </Row>
         </Container>
       </div>
+      <Container className="movie-menu-section">
+        <Row>
+          <Col>
+            <Tabs
+              defaultActiveKey="profile"
+              id="justify-tab-example"
+              className="mb-3"
+              justify
+            >
+              <Tab eventKey="review" title="Review">
+                {reviewData &&
+                  reviewData.map((review) => (
+                    <Row key={review.id} className="movie-review">
+                      <Col lg={2} xs={12} className="avatar-img">
+                        <img
+                          src={`https://media.themoviedb.org/t/p/w100_and_h100_face${review.author_details.avatar_path}`}
+                        />
+                      </Col>
+                      <Col lg={10} xs={12}>
+                        <div className="review-detail">
+                          <p>
+                            {renderStarRating(review.author_details.rating)}
+                          </p>
+                          &nbsp;
+                          <p>{review.author}</p>&nbsp;
+                          <p>{review.created_at.split("T")[0]}</p>
+                        </div>
+
+                        <p>{review.content}</p>
+                      </Col>
+                    </Row>
+                  ))}
+
+                {/* <div>
+                      <img
+                        src={`https://media.themoviedb.org/t/p/w150_and_h150_face${reviewData.avatar_path}`}
+                      />
+                    </div> */}
+              </Tab>
+              <Tab eventKey="recommend" title="Recommend Movies">
+                Tab content for Profile
+              </Tab>
+              <Tab eventKey="video" title="Trailer">
+                Tab content for Loooonger Tab
+              </Tab>
+            </Tabs>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };
