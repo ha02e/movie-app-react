@@ -152,7 +152,7 @@ const MovieDetailPage = () => {
                 </div>
               </Tab>
               <Tab eventKey="video" title="Trailer">
-                Tab content for Loooonger Tab
+                movie trailler
               </Tab>
             </Tabs>
           </Col>
