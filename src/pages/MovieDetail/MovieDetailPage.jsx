@@ -143,11 +143,12 @@ const MovieDetailPage = () => {
               </Tab>
               <Tab eventKey="recommend" title="Recommend Movies">
                 <div className="movie-recommendations-container">
-                  {recommendData.map((movie, index) => (
-                    <div key={index} className="movie-card-wrapper">
-                      <MovieCard movie={movie} />
-                    </div>
-                  ))}
+                  {recommendData &&
+                    recommendData.map((movie, index) => (
+                      <div key={index} className="movie-card-wrapper">
+                        <MovieCard movie={movie} />
+                      </div>
+                    ))}
                 </div>
               </Tab>
               <Tab eventKey="video" title="Trailer">
