@@ -12,6 +12,8 @@ import {
 } from "react-bootstrap";
 import { useMovieDetailQuery } from "../../hooks/useMovieDetail";
 import { useMovieReviewsQuery } from "../../hooks/useMovieReviews";
+import { useMovieRecommendationsQuery } from "../../hooks/useMovieRecommendations";
+import MovieCard from "../../common/MovieCard/MovieCard";
 import "./MovieDetailPage.style.css";
 
 const MovieDetailPage = () => {
@@ -38,6 +40,9 @@ const MovieDetailPage = () => {
 
     return stars.join("");
   };
+
+  const { data: recommendData } = useMovieRecommendationsQuery({ id });
+  console.log("recommendData@", recommendData);
 
   if (isLoading) {
     return (
@@ -135,15 +140,15 @@ const MovieDetailPage = () => {
                       </Col>
                     </Row>
                   ))}
-
-                {/* <div>
-                      <img
-                        src={`https://media.themoviedb.org/t/p/w150_and_h150_face${reviewData.avatar_path}`}
-                      />
-                    </div> */}
               </Tab>
               <Tab eventKey="recommend" title="Recommend Movies">
-                Tab content for Profile
+                <div className="movie-recommendations-container">
+                  {recommendData.map((movie, index) => (
+                    <div key={index} className="movie-card-wrapper">
+                      <MovieCard movie={movie} />
+                    </div>
+                  ))}
+                </div>
               </Tab>
               <Tab eventKey="video" title="Trailer">
                 Tab content for Loooonger Tab

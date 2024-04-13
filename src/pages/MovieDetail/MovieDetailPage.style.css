@@ -100,6 +100,17 @@
 .review-detail {
   display: flex;
 }
+
 .review-detail > p {
   margin-right: 1.2em;
+}
+
+.movie-recommendations-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.movie-card-wrapper {
+  flex: 0 0 20%;
+  max-width: 20%;
 }
