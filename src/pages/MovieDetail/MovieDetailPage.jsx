@@ -13,6 +13,7 @@ import {
 import { useMovieDetailQuery } from "../../hooks/useMovieDetail";
 import { useMovieReviewsQuery } from "../../hooks/useMovieReviews";
 import { useMovieRecommendationsQuery } from "../../hooks/useMovieRecommendations";
+import Footer from "../../layout/Footer/Footer";
 import MovieCard from "../../common/MovieCard/MovieCard";
 import "./MovieDetailPage.style.css";
 
@@ -159,6 +160,8 @@ const MovieDetailPage = () => {
           </Col>
         </Row>
       </Container>
+
+      <Footer />
     </div>
   );
 };

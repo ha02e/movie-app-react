@@ -8,6 +8,7 @@ import { Container, Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import MovieCard from "../../common/MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
 import "./MoviePage.style.css";
+import Footer from "../../layout/Footer/Footer";
 
 //경로
 //1. nav바에서 클릭해서 온 경우 -> keyword 없음 / popularMovie 보여주기
@@ -168,6 +169,7 @@ const MoviePage = () => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </div>
   );
 };
