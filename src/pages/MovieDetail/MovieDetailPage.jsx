@@ -112,7 +112,7 @@ const MovieDetailPage = () => {
         <Row>
           <Col>
             <Tabs
-              defaultActiveKey="profile"
+              defaultActiveKey="review"
               id="justify-tab-example"
               className="mb-3"
               justify
