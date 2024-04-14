@@ -124,6 +124,7 @@ const MovieDetailPage = () => {
                       <Col lg={2} xs={12} className="avatar-img">
                         <img
                           src={`https://media.themoviedb.org/t/p/w100_and_h100_face${review.author_details.avatar_path}`}
+                          alt="avatar"
                         />
                       </Col>
                       <Col lg={10} xs={12}>
